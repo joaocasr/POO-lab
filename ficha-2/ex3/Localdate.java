@@ -43,7 +43,16 @@ public class Localdate {
         }
         return getLocaldate(minData);
     }
-
+    public String toString(){
+        int N =getSize();
+        String string="";
+        int i;
+        for(i=0;i<N;i++){
+            string = string+getLocaldate(0);
+            string = string + " ";
+        }
+        return string;
+    }
 
 }
 

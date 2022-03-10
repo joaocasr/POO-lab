@@ -18,7 +18,7 @@ public class Main {
         System.out.println("A data mais próxima de "+data+" no array date_array é: "+localdate.dataMaisProxima(data));
 
         //Alinea c)
-        System.out.println("String: " +localdate.toString());
+        System.out.print(localdate.tostring());
     }
 }
 

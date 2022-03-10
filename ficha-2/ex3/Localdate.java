@@ -19,12 +19,12 @@ public class Localdate {
     }
 
     public void insereLocaldate(LocalDate date) {
-        this.date_array[this.size++] = date.clone();
+        this.date_array[this.size++] = date;
         this.size++;
     }
 
     public LocalDate getLocaldate(int x) {
-        return date_array[x];
+        return this.date_array[x];
     }
 
     public int getSize() {
@@ -43,18 +43,14 @@ public class Localdate {
         }
         return getLocaldate(minData);
     }
-    public String toString(){
-        int N =getSize();
-        String string="";
+    public StringBuilder tostring(){
+        int N =getSize()-1;
+        StringBuilder string = new StringBuilder ("String: ");
         int i;
         for(i=0;i<N;i++){
-            string = string+getLocaldate(0);
-            string = string + " ";
+            string.append(getLocaldate(i)+" ");
         }
         return string;
     }
 
-    protected Localdate clone(){
-        return new Localdate(5);
-    }
 }

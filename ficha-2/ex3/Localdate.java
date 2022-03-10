@@ -19,7 +19,7 @@ public class Localdate {
     }
 
     public void insereLocaldate(LocalDate date) {
-        this.date_array[this.size++] = date;
+        this.date_array[this.size++] = date.clone();
         this.size++;
     }
 
@@ -28,7 +28,7 @@ public class Localdate {
     }
 
     public int getSize() {
-        return size;
+        return this.size;
     }
 
     public LocalDate dataMaisProxima(LocalDate data){
@@ -54,5 +54,7 @@ public class Localdate {
         return string;
     }
 
+    protected Localdate clone(){
+        return new Localdate(5);
+    }
 }
-

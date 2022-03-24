@@ -43,7 +43,7 @@ public class Localdate {
         }
         return getLocaldate(minData);
     }
-    public StringBuilder tostring(){
+    public StringBuilder toString(){
         int N =getSize()-1;
         StringBuilder string = new StringBuilder ("String: ");
         int i;

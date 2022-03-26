@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Encomenda {
 
@@ -8,7 +9,7 @@ public class Encomenda {
     private String morada;
     private int nencomenda;
     private LocalDate data_encomenda;
-    private ArrayList<LinhaEncomenda> listaEncomenda;
+    private List<LinhaEncomenda> listaEncomenda;
 
     public Encomenda() {
         this.nome = "João Castro";

@@ -79,15 +79,11 @@ public class Encomenda {
         this.data_encomenda = data_encomenda;
     }
 
-    public ArrayList<LinhaEncomenda> getListaEncomendas(){
-        ArrayList<LinhaEncomenda> aux = new ArrayList<>();
-        for(LinhaEncomenda i: this.listaEncomenda){
-            aux.add(i.clone());
-        }
-        return aux;
+    public List<LinhaEncomenda> getListaEncomendas(){
+        return this.listaEncomenda.stream().map(LinhaEncomenda::clone).collect(Collectors.toList());
     }
 
-    public void setListaEncomenda(ArrayList<LinhaEncomenda> aux){
+    public void setListaEncomenda(List<LinhaEncomenda> aux){
         this.listaEncomenda = new ArrayList<>();//como se fosse para esvaziar o arraylist
         for(LinhaEncomenda i: aux){
             this.listaEncomenda.add(i.clone());//vamos adicionando os novos objetos que estavam no aux na listaEncomenda

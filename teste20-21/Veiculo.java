@@ -2,12 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
 
-/**
- * Classe Veículo, para utilização na Ficha 6.
- *
- * @author MaterialPOO
- * @version 20210420
- */
 
 public abstract class Veiculo implements Comparable<Veiculo>, Serializable {
     private String marca;
@@ -18,12 +12,7 @@ public abstract class Veiculo implements Comparable<Veiculo>, Serializable {
     private double precokm;
     private ArrayList<Integer> classificacao;
     private int kms;
-    private int kmsUltimo; // kms da última viagem??
-
-    /**
-     * Construtores
-     */
-
+    private int kmsUltimo; 
 
     public Veiculo() {
         this.marca = "";

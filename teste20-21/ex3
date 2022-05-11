@@ -1,0 +1,25 @@
+public interface I {
+public int miA();
+public int miB();
+}
+public class A implements I {
+...
+public A() { .. }
+public int m1() { ... }
+public int m2() { ... }
+public int miA() { ... }
+}
+public class B extends A implements I {
+...
+public B() { ... }
+public int miB() { ... }
+}
+Qual das seguintes afirmações é válida:
+○ A definição da interface I está errada pois os seus métodos têm que ser abstractos.
+    Falso.
+○ A classe A não está correcta pois não pode definir o método miA() da interface I.
+    Falso. a classe A deve apresentar uma definição quer do método miA(),quer do método miB(),visto que
+       implementa a interface I.
+○ A classe B não está correcta pois não define a implementação do método miA().
+    Falso. a classe B é uma extensão de A pelo que herda a definição do método miA()
+X○ A seguinte expressão é válida: I i = new B()

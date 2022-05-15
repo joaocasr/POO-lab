@@ -4,10 +4,11 @@
  * @author (João Castro)
  * @version 15-05-2022
  */
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class DriveIT{
+public class DriveIT implements Serializable {
     private Map<String,VeiculoGeral> allVeiculos;
 
     public DriveIT(Map<String,VeiculoGeral> allVeiculos){
@@ -53,9 +54,20 @@ public class DriveIT{
       return getVeiculos().stream().sorted(c).collect(Collectors.toList());
     }
 
+    public VeiculoGeral veiculoMaisBarato(){
+        Comparator<VeiculoGeral> c = (c1,c2)-> (c1.custoReal()!=c2.custoReal()) ? (int) (c1.custoReal() - c2.custoReal()) : c1.getIdentificacao().compareTo(c2.getIdentificacao());
+        return this.allVeiculos.values().stream().map(VeiculoGeral::clone).sorted(c).findFirst().get().clone();
+    }
+
+
     public VeiculoGeral veiculoMenosUtilizado(){
         Comparator<VeiculoGeral> c = (c1,c2)-> (c1.getKmPercorridos()!=c2.getKmPercorridos()) ? (int) (c1.getKmPercorridos() - c2.getKmPercorridos()) : c1.getIdentificacao().compareTo(c2.getIdentificacao());
         return this.allVeiculos.values().stream().map(VeiculoGeral::clone).sorted(c).findFirst().get().clone();
+    }
+
+    public Iterator<VeiculoGeral> ordenarVeiculo(){
+        Comparator<VeiculoGeral> c = (c1,c2)-> (c1.getKmPercorridos()!=c2.getKmPercorridos()) ? (int) (c1.getKmPercorridos() - c2.getKmPercorridos()) : c1.getIdentificacao().compareTo(c2.getIdentificacao());
+        return this.allVeiculos.values().stream().map(VeiculoGeral::clone).sorted(c).collect(Collectors.toList()).iterator();
     }
 
     public List<VeiculoGeral> getVeiculos(){
@@ -79,6 +91,35 @@ public class DriveIT{
     public Map<String,VeiculoGeral> getAllVeiculos(){
         return this.allVeiculos.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue));
     }
+
+    public List<BonificaKms> daoPontos(){
+       return this.allVeiculos.values().stream()
+                .filter((e)->e instanceof BonificaKms).map((e)->(BonificaKms) e).collect(Collectors.toList());
+    }
+
+    public void escreveFicheiroCSV(String filename) throws FileNotFoundException {
+        PrintWriter pw = new PrintWriter(filename);
+        pw.println(this);
+        pw.flush();
+        pw.close();
+    }
+
+    public void guardaEstado(String filename) throws IOException {
+        FileOutputStream fos = new FileOutputStream(filename);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(this);
+        oos.flush();
+        oos.close();
+    }
+
+    public static VeiculoGeral carregarEstado(String filename) throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(filename);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        VeiculoGeral vg = (VeiculoGeral) ois.readObject();
+        return vg.clone();
+    }
+
+
 
     public void setAllVeiculos(Map<String,VeiculoGeral> aux){
         this.allVeiculos = new HashMap<>();

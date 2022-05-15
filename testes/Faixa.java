@@ -8,7 +8,7 @@ public class Faixa implements Playable{
     private String autor;
     private double duracao;
     private int classificacao;
-    private ArrayList<String> letra;
+    private List<String> letra;
     private int numeroVezesTocada;
     private LocalDateTime ultimaVez;
 

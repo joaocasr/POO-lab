@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 
 public class Main {
         public static void main(String[] args) {
-                Faixa f1,f2,f3,f4,f5;
+/*                Faixa f1,f2,f3,f4,f5;
                 List<String> l1 = new ArrayList<>();
                 l1.add("I'm only human");
                         l1.add("I'm only, I'm only");
@@ -47,7 +47,7 @@ public class Main {
                 lista.stream().map(Faixa::clone).sorted(c).collect(Collectors.toList());
                 System.out.println(lista);
 
-/*                TreeSet<Faixa> l = new TreeSet<Faixa>(new compareFaixas());
+                TreeSet<Faixa> l = new TreeSet<Faixa>(new compareFaixas());
                 l.add(f1);
                 l.add(f2);
                 l.add(f3);
@@ -71,6 +71,8 @@ public class Main {
                 System.out.println(pl);
 
 */
+
+
 
         }
 }

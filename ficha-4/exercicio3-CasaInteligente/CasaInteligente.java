@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CasaInteligente {
@@ -33,6 +31,7 @@ public class CasaInteligente {
         this.capacidade = smartHome.getCapacidade();
     }
 
+
     public List<Lampada> getLampList(){
         return this.lampList.stream().map(Lampada::clone).collect(Collectors.toList());
     }
@@ -44,6 +43,14 @@ public class CasaInteligente {
             Lampada l = it.next();
             this.lampList.add(l.clone());
         }
+    }
+
+    public void ligaLampadaNormal(int index){
+        this.lampList.get(index).setMode(Lampada.Mode.ON);
+    }
+
+    public void ligaLampadaEco(int index){
+        this.lampList.get(index).setMode(Lampada.Mode.ECO);
     }
 
     public int qtEmEco(){
@@ -62,6 +69,16 @@ public class CasaInteligente {
         }
     }
 
+    public Lampada maisGastadora(){
+        Comparator<Lampada> c = (c1,c2)-> (int)(c2.getTotalConsumo()-c1.getTotalConsumo());
+        return this.lampList.stream().map(Lampada::clone).sorted(c).findFirst().get();
+    }
+
+    public Set<Lampada> podiumEconomia(){
+        Comparator<Lampada> c = (c1,c2)-> (int)(c1.getTotalConsumo()-c2.getTotalConsumo());
+        return this.lampList.stream().map(Lampada::clone).sorted(c).limit(3).collect(Collectors.toSet());
+    }
+
     public boolean exist(Lampada l){
         Iterator<Lampada> it = this.lampList.iterator();
         boolean found =false;
@@ -72,6 +89,10 @@ public class CasaInteligente {
         return found;
     }
 
+    public void ligaTodasMax(){
+        this.lampList.forEach(x->x.setMode(Lampada.Mode.ON));
+    }
+
     public void addLampada(Lampada l){
         if(this.lampList.size()<this.capacidade && !this.lampList.contains(l))
             this.lampList.add(l.clone());
@@ -79,6 +100,9 @@ public class CasaInteligente {
 
     public void removeLampada(int index){
         this.lampList.remove(index);
+    }
+    public void reset(){
+        this.lampList.forEach(x->x.setTotalConsumo(0.0));
     }
 
     public String toString(){
@@ -89,15 +113,16 @@ public class CasaInteligente {
         sb.append("Capacidade: ").append(this.capacidade);
         return sb.toString();
     }
-    
+
     public boolean equals(Object o){
         if(o==this) return true;
         if(o==null || this.getClass()!=o.getClass()) return false;
         CasaInteligente casaInteligente = (CasaInteligente) o;
         return ( this.lampList.equals(casaInteligente.getLampList()) && this.capacidade == casaInteligente.getCapacidade() );
     }
-    
+
     public CasaInteligente clone(){
         return new CasaInteligente(this);
     }
 }
+

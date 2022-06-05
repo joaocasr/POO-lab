@@ -48,5 +48,7 @@ public class SpotifyPOO implements Serializable {
                 }
             }
         }
+        pw.flush();
+        pw.close();
     }
 }

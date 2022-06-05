@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -34,6 +35,7 @@ public class Entidade {
     }
 
     public void setFaturas(Map<LocalDate, Fatura> faturas) {
+        this.faturas = new HashMap<>();
         faturas.forEach((key,value)->this.faturas.put(key,value.clone()));
     }
 

@@ -79,16 +79,10 @@ public class Aluno implements Comparable<Aluno>{
     }
 
 
-
     public Aluno clone() {
         return new Aluno(this);
     }
 
-
-    public int hashCode() {
-        return this.nome.hashCode() + this.numero.hashCode() +
-                this.curso.hashCode() + this.nota*7;
-    }
 
     public int compareTo(Aluno outroAluno) {
         return this.nome.compareTo(outroAluno.getNome());

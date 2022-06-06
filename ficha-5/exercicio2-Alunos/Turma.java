@@ -1,4 +1,7 @@
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Turma {
@@ -41,13 +44,30 @@ public class Turma {
         return alunos.size();
     }
 
+    /**
+     *  metodos para testagem das interfaces funcionais
+     */
+    public Collection<Aluno> diminuiValor (Consumer<Aluno> c) {
+        this.alunos.values().forEach(x->c.accept(x));
+        return this.alunos.values().stream().map(Aluno::clone).collect(Collectors.toList());
+    }
+
+    public Collection<Aluno> imprimePredicate (Predicate<Aluno> c) {
+       return this.alunos.values().stream().map(Aluno::clone).filter(x->c.test(x)).collect(Collectors.toList());
+    }
+
+    public Collection<String> imprimeFunction (Function<Aluno,String> c) {
+        return this.alunos.values().stream().map(x->c.apply(x)).collect(Collectors.toList());
+    }
+    /***********/
+
     public Collection<Aluno> alunosOrdemAlfabetica () {
         Comparator<Aluno> c =(c1,c2)->c1.compareTo(c2);
         return this.alunos.values().stream().sorted(c).map(Aluno::clone).collect(Collectors.toList());
     }
 
 
-    public  Set<Aluno> alunosOrdemDecrescenteNumero () {
+    public Set<Aluno> alunosOrdemDecrescenteNumero () {
         return this.alunos.values().stream().map(Aluno::clone).collect(Collectors.toCollection(()->new TreeSet<>(new ComparaNumero())));
     }
 

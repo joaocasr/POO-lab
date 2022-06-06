@@ -7,6 +7,10 @@ public class Pagina implements Comparable<Pagina>, Serializable {
     public Pagina() {
         this.texto = new ArrayList<>();
     }
+
+    public Pagina(List<String> txt) {
+        setTexto(txt);
+    }
     /* método que devolve uma formatação do texto */
     public String reproduzPagina() {
         //...
@@ -15,6 +19,10 @@ public class Pagina implements Comparable<Pagina>, Serializable {
 
     public Pagina clone(){
         return new Pagina();
+    }
+
+    public void setTexto(List<String> t){
+        this.texto = new ArrayList<>(t);
     }
 
     @Override

@@ -36,4 +36,25 @@ public class Utilizador {
         return this.allLivros.stream().map(Livro::clone).collect(Collectors.toList());
     }
 
+    public List<String> reproduzLivros(){
+        return this.allLivros.stream().map(Livro::getPagPorLer)
+                .flatMap(List::stream)
+                .map(Pagina::reproduzPagina).collect(Collectors.toList());
+
+        /*List<String> allTexto = new ArrayList<>();
+        for(Livro l : this.allLivros) {
+            for (l.getPagPorLer().size() != 0) {
+                try {
+                    Pagina p = l.devolvePag(l.getPagPorLer().size() + 1);
+                    allTexto.add(p.reproduzPagina());
+                    avancaPags(l.getCodISBN(), 1);
+                } catch (PagInexistenteException e) {
+                    System.out.println(e.getMessage());
+                }
+
+            }
+        }
+        return allTexto;*/
+    }
+
 }
